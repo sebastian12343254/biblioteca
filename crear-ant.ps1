@@ -1,0 +1,49 @@
+# Crear estructura básica de un proyecto Ant
+New-Item -ItemType Directory -Path "src/main/java" -Force
+New-Item -ItemType Directory -Path "build/classes" -Force
+New-Item -ItemType Directory -Path "lib" -Force
+
+# Crear archivo build.xml básico
+@'
+<project name="MiProyectoAnt" default="run" basedir=".">
+    <property name="src.dir" value="src/main/java"/>
+    <property name="build.dir" value="build/classes"/>
+    <property name="main.class" value="com.example.App"/>
+
+    <target name="clean">
+        <delete dir="${build.dir}"/>
+    </target>
+
+    <target name="compile" depends="clean">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}">
+            <classpath>
+                <fileset dir="lib" includes="*.jar"/>
+            </classpath>
+        </javac>
+    </target>
+
+    <target name="run" depends="compile">
+        <java classname="${main.class}" fork="true">
+            <classpath>
+                <path location="${build.dir}"/>
+                <fileset dir="lib" includes="*.jar"/>
+            </classpath>
+        </java>
+    </target>
+</project>
+'@ | Out-File -FilePath "build.xml" -Encoding UTF8
+
+# Crear ejemplo básico de clase Java
+New-Item -ItemType Directory -Path "src/main/java/com/example" -Force
+@'
+package com.example;
+
+public class App {
+    public static void main(String[] args) {
+        System.out.println("¡Hola, mundo desde Ant!");
+    }
+}
+'@ | Out-File -FilePath "src/main/java/com/example/App.java" -Encoding UTF8
+
+Write-Output "Estructura básica creada con éxito."
