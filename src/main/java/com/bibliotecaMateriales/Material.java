@@ -1,12 +1,17 @@
 package com.bibliotecaMateriales;
 
+//Creacion clase abstracta como plantilla
 public abstract class Material {
+
+    //atributos obligatorios   
     private String title;
     private String author;
     private int year;
 
+    //metodo abstracto para imprimir los datos de el material
     public abstract void print();
 
+    //getter y setters
     public int getYear() {
         return year;
     }

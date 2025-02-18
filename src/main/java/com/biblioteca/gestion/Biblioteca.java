@@ -1,53 +1,56 @@
 package com.biblioteca.gestion;
 
-import java.util.ArrayList;
+//importacion de paquete de materiales
 import com.bibliotecaMateriales.*;
+import java.util.ArrayList;
 import java.util.Scanner;
-public class Biblioteca extends Material{
+
+public class Biblioteca{
     ArrayList<Material> materiales = new ArrayList<Material>();
     Scanner scanner = new Scanner(System.in);
 
-    private String title;
-
-    public void print(){
-        for(Material material : materiales){
-            material.print();
-        }
+    //metodo para crear un producto 
+    void createMaterial(Material material){
+        System.out.println("Ingrese el titulo: ");
+        material.setTitle(scanner.nextLine());
+        System.out.println("Ingrese el autor: ");
+        material.setAuthor(scanner.nextLine());
+        System.out.println("Ingrese el año: ");
+        material.setYear(scanner.nextInt());
+        scanner.nextLine();
     }
-
-    public void addMaterial(Material material){
+    //metodo para agregar un producto a la biblioteca
+    void addMaterial(Material material){
         materiales.add(material);
     }
 
-    public void removeMaterial(Material material){
+    //metodo para eliminar un producto de la biblioteca
+    void deleteMaterial(Material material){
         materiales.remove(material);
     }
 
-    public void searchMaterial(){
-        System.out.println("Ingrese el titulo del material a buscar: ");
-        title = scanner.nextLine();
-        for(Material material : materiales){
-            if(material.getTitle().equals(title)){
-                material.print();
+    //metodo para actualizar un producto de la biblioteca, necesita mas validaciones
+    void updateMaterial(Material material){
+       String titulo = scanner.nextLine();
+        for (Material material1 : materiales) {
+            if(titulo.equals(material1.getTitle())){
+                System.out.println("Ingrese el nuevo titulo: ");
+                material1.setTitle(scanner.nextLine());
+            }
+            else{
+                System.out.println("No se encontro el material");
             }
         }
     }
 
-    public void updateMaterial(){
-        System.out.println("Ingrese el titulo del material a actualizar: ");
-        title = scanner.nextLine();
-        for(Material material : materiales){
-            if(material.getTitle().equals(title)){
-                System.out.println("Ingrese el nuevo titulo: ");
-                String newTitle = scanner.nextLine();
-                material.setTitle(newTitle);
-                System.out.println("Ingrese el nuevo autor: ");
-                String newAuthor = scanner.nextLine();
-                material.setAuthor(newAuthor);
-                System.out.println("Ingrese el nuevo año: ");
-                int newYear = scanner.nextInt();
-                material.setYear(newYear);
-            }
+    //metodo para mostrar los productos de la biblioteca
+    void showMaterials(){
+        for (Material material : materiales) {
+            material.print();
         }
     }
 }
+
+
+
+

@@ -1,0 +1,6 @@
+Problemas ***
+    Crear materiales de diferentes tipo ya sea revista etc
+    Como añadir diferentes tipos en el arraylist
+    Como preguntar al usuario que quiere
+Investigar 
+    Contructores en clases heredadas y como funcionan al momento de inicializar un libro o material 
